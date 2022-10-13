@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+current_script_path=${BASH_SOURCE[0]}
+plugin_dir=$(dirname "$(dirname "$current_script_path")")
+
+# shellcheck source=../lib/utils.bash
+source "${plugin_dir}/lib/utils.bash"
+
+# only display versions 0.19.3 and above (release when zarf was introduced)
+list_all_versions | sort_versions | xargs echo | sed 's/.* \(0.19.3 .*\)$/\1/'
